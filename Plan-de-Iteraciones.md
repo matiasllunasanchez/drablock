@@ -84,10 +84,10 @@ Tres tracks. El **A** es donde se decide el juego y por donde arrancamos. El **B
 
 ### Track B — Validación técnica (intercalable tras A2)
 
-**B1 · Spike de estilo + motor**
-- *Objetivo:* confirmar en la práctica la premisa que sostiene todo — "la unicidad procedural es barata en 3D modular".
-- *Entregable:* mini-prototipo (1 dragón modular en Godot con variación por shader/morphs) + nota de conclusión.
-- *Definición de Hecho:* un dragón mostrando varias variaciones perceptibles, **+** una conclusión escrita: ¿la premisa se sostiene, sí o no? Si no, se replantea estilo/motor antes de seguir.
+**B1 · Spike de estilo + motor** *(reorientado a 2D)*
+- *Objetivo:* confirmar en la práctica la premisa que sostiene todo — "la unicidad procedural es barata en **2D modular**". *(El plan original decía 3D; se decidió **2D en Godot** para el MVP: indie, más barato, encaja con los minijuegos de plataformas de A7/E1. Un salto a 3D queda como decisión de escala posterior.)*
+- *Entregable:* mini-prototipo en Godot 4 (**`godot-b1-spike/`** — 12 dragones únicos generados por código, 0 assets) + nota de conclusión (`B1-Spike-nota.md`).
+- *Definición de Hecho:* varias variaciones perceptibles, **+** una conclusión escrita: ¿la premisa se sostiene, sí o no? Si no, se replantea estilo/motor antes de seguir. **La conclusión requiere correr el prototipo (Godot local); no se puede cerrar sin ese run.**
 - *Depende de:* A2.
 
 ### Track C — Construcción del MVP (solo con el núcleo aprobado)
@@ -101,6 +101,16 @@ Tres tracks. El **A** es donde se decide el juego y por donde arrancamos. El **B
 **C2+ · Incrementos jugables**
 - Se definen al armar el backlog en C1. Se construyen por incrementos revisables, cada uno con su propia compuerta.
 
+### Track E — Economía *(agregado tras A4; antes estaba fuera de alcance)*
+
+Nació como notas dispersas en A1–A5 y creció hasta necesitar diseño propio: doble moneda, apuestas de PvP, y una familia de **sinks** (reencarnación, poción de longevidad, veterinario escalonado, **adiestrador**, medicamentos, item carísimo de limpieza de traumas, IA de resumen).
+
+**E1 · Sistema económico (monedas, créditos, fuentes y sinks)**
+- *Objetivo:* diseñar la economía completa como un sistema coherente, no como notas sueltas.
+- *Entregable:* spec (`.md`) con el mapa de fuentes ↔ sinks y las reglas de balance conceptual.
+- *Definición de Hecho:* definidas las **dos monedas** (monedas in-game vs. créditos) con su rol; **fuentes** de cada una; **sinks** catalogados (reencarnación, revivir, longevidad, veterinario x4 niveles, medicamentos, limpieza de traumas, apuestas); la **curva de dependencia del veterinario** (decae con el tiempo de crianza); y postura sobre **dinero real** (¿se compran monedas/créditos?, ¿qué sí y qué no?).
+- *Depende de:* A1 (decisiones de permadeath/PvP/doble moneda). **Se nutre de** A2, A3, A4, A6, A7 (cada uno aporta sus sinks). Conviene cerrarlo **después de A7** para tener todos los sinks a la vista.
+
 ---
 
 ## Tablero de estado
@@ -109,15 +119,16 @@ Marcá el estado a medida que avanzamos. Estados: `Pendiente` · `En curso` · `
 
 | ID | Iteración | Track | Entregable | Depende de | Estado |
 |----|-----------|-------|------------|------------|--------|
-| A1 | Pilares / constitución | A | Doc 1 pág | — | Pendiente |
-| A2 | Modelo del dragón (4 capas) | A | Spec `.md` | A1 | Pendiente |
-| A3 | Vínculo + obediencia imperfecta | A | Spec + diagrama | A2 | Pendiente |
-| A4 | Biografía (cicatrices/dieta/clima/batalla) | A | Spec `.md` | A2 | Pendiente |
-| A5 | Personalidad + crianza | A | Spec `.md` | A2, A3 | Pendiente |
-| A6 | Ciclo de vida y muerte | A | Spec `.md` | A2, A3, A4 | Pendiente |
-| A7 | Sistema de batalla (núcleo) | A | Spec + diagrama | A2, A3, A5 | Pendiente |
-| B1 | Spike estilo + motor | B | Prototipo + nota | A2 | Pendiente |
-| C1 | Backlog del MVP | C | US + criterios | A1–A7, B1 | Pendiente |
+| A1 | Pilares / constitución | A | Doc 1 pág | — | Aprobado |
+| A2 | Modelo del dragón (4 capas) | A | Spec `.md` | A1 | Aprobado |
+| A3 | Vínculo + obediencia imperfecta | A | Spec + diagrama | A2 | Aprobado |
+| A4 | Biografía (cicatrices/dieta/clima/batalla) | A | Spec `.md` | A2 | Aprobado |
+| A5 | Personalidad + crianza | A | Spec `.md` | A2, A3 | Aprobado |
+| A6 | Ciclo de vida y muerte | A | Spec `.md` | A2, A3, A4 | Aprobado |
+| A7 | Sistema de batalla (núcleo) | A | Spec + diagrama | A2, A3, A5 | Aprobado |
+| B1 | Spike estilo + motor (**2D**) | B | Prototipo + nota | A2 | En revisión |
+| E1 | Sistema económico (monedas/créditos, sinks) | E | Spec `.md` | A1 (se nutre de A2–A7) | Aprobado |
+| C1 | Backlog del MVP | C | US + criterios | A1–A7, E1, B1 | En revisión (borrador, provisional sobre B1) |
 | C2+| Incrementos jugables | C | (a definir en C1) | C1 | Pendiente |
 
 ---
@@ -139,10 +150,17 @@ Cuando un cambio propague, lo marco explícitamente ("esto obliga a revisitar A4
 
 Genética/herencia/linaje, árboles familiares, mutaciones raras y el sistema elemental composicional **no se planifican todavía**. Están diseñados en el GDD, pero especificarlos ahora sería trabajo en riesgo: dependen de que el núcleo (A1–A7) esté validado. Entran a este plan como un Track A' recién cuando lleguemos.
 
+> **Nota (por A6):** A6 diseñó el **legado generacional** — la capa emocional de mentoría (co-crianza en paralelo, pasar virtudes/defectos, morir solo vs. dejar sucesor). Eso **abre la puerta** a crías/huevos, pero las **reglas genéticas de herencia** siguen en este Track A' diferido: A6 define el loop de vínculo, no qué stats pasan de padre a cría.
+
 Del lado del combate, **A7 diseña solo el núcleo del sistema de batalla**. Quedan downstream, para planificar después: el **contenido PvE** (encuentros, amenazas al santuario), que se planifica junto con el MVP según la decisión abierta en A7; y el **PvP de exhibición**, endgame opcional sujeto a la decisión de PvP en A1 y a la advertencia del GDD de que el PvP competitivo tiende a matar el apego.
 
 ---
 
-## Próximo paso
+## Estado y handoff
 
-Confirmá las tres **convenciones de proceso** (o aceptá los defaults) e indicá el punto de arranque. Con eso, abrimos la primera iteración.
+**Toda la planificación está cerrada:** A1–A7 (núcleo) y E1 (economía) aprobados. Falta solo:
+1. **Correr B1** (`godot-b1-spike/`) y escribir la conclusión en `B1-Spike-nota.md` — validar la premisa 2D.
+2. **Confirmar C1** (backlog del MVP) una vez aprobado B1.
+3. **Construir el MVP** siguiendo `C1-Backlog-MVP.md`.
+
+El proyecto está preparado para levantarse en frío: ver **`../CLAUDE.md`** (raíz), que orienta a cualquier agente/desarrollador que continúe. Ahí está el mapa de archivos, el juego en 60 segundos, la dirección técnica, el orden de construcción y los cabos sueltos.

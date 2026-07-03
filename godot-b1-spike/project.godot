@@ -1,0 +1,15 @@
+; Drablock — B1 spike (2D). Proyecto mínimo de Godot 4.
+; Objetivo: validar que la unicidad procedural es barata en 2D modular.
+
+config_version=5
+
+[application]
+
+config/name="Drablock B1 Spike (2D)"
+run/main_scene="res://Main.tscn"
+config/features=PackedStringArray("4.2")
+
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
