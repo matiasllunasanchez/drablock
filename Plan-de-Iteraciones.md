@@ -163,4 +163,4 @@ Del lado del combate, **A7 diseña solo el núcleo del sistema de batalla**. Que
 2. **Confirmar C1** (backlog del MVP) una vez aprobado B1.
 3. **Construir el MVP** siguiendo `C1-Backlog-MVP.md`.
 
-El proyecto está preparado para levantarse en frío: ver **`../CLAUDE.md`** (raíz), que orienta a cualquier agente/desarrollador que continúe. Ahí está el mapa de archivos, el juego en 60 segundos, la dirección técnica, el orden de construcción y los cabos sueltos.
+El proyecto está preparado para levantarse en frío: ver **`CLAUDE.md`** (en este directorio, raíz del repo), que orienta a cualquier agente/desarrollador que continúe. Ahí está el mapa de archivos, el juego en 60 segundos, la dirección técnica, el orden de construcción y los cabos sueltos.

@@ -35,5 +35,5 @@ Agregá una fila a la tabla. IDs correlativos `D-NNN`. Marcá `Validar con dueñ
 
 ## Preguntas abiertas para el dueño *(acumulá acá lo que convenga consultar)*
 
-- **B1:** ¿la premisa de unicidad procedural en 2D se sostuvo al correr el spike? (cerrar `drablock/B1-Spike-nota.md`).
+- **B1:** ¿la premisa de unicidad procedural en 2D se sostuvo al correr el spike? (cerrar `B1-Spike-nota.md`).
 - _(agregá acá cualquier duda que no puedas resolver desde los specs y que cambie el diseño)_

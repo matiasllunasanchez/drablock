@@ -3,6 +3,8 @@
 > **Para el agente que levanta este proyecto (Fable u otro):** esto es el punto de entrada. Leé este archivo entero antes de tocar nada. La planificación de diseño está **completa**; el objetivo ahora es **construir el MVP de punta a punta**.
 >
 > **Tenés autonomía para desarrollar todo lo solicitado sin pedir aprobación paso a paso.** El diseño ya fue decidido y está en los specs. Cuando falte un dato o tengas que asumir algo, **no te frenes: tomá la decisión razonable y registrala** en `Registro-Decisiones-IA.md` (ver más abajo). Solo detenete a preguntar si una ambigüedad cambia el diseño de forma grande e irreversible.
+>
+> **Ubicación:** este directorio (`drablock/`) es la **raíz del repositorio** (git ya inicializado). Todas las rutas de este documento son relativas a acá.
 
 ---
 
@@ -24,7 +26,7 @@ Un juego de **crianza y vínculo con dragones** en **2D (Godot 4)**. No es un ju
 | Backlog del MVP (C1) | 🟡 Borrador ordenado, provisional sobre B1 |
 | Construcción del MVP | ⏳ **Este es el próximo trabajo** |
 
-**Lo primero a hacer:** correr el spike `drablock/godot-b1-spike/` en Godot 4.2+ y completar `drablock/B1-Spike-nota.md`. Si sostiene la premisa (unicidad procedural barata en 2D), arrancar el MVP por `drablock/C1-Backlog-MVP.md`.
+**Lo primero a hacer:** correr el spike `godot-b1-spike/` en Godot 4.2+ y completar `B1-Spike-nota.md`. Si sostiene la premisa (unicidad procedural barata en 2D), arrancar el MVP por `C1-Backlog-MVP.md`.
 
 ---
 
@@ -33,24 +35,76 @@ Un juego de **crianza y vínculo con dragones** en **2D (Godot 4)**. No es un ju
 Leé en este orden. Cada spec es autocontenido y cierra con *Decisiones resueltas* + *Impactos aguas abajo* + *Definición de Hecho*.
 
 1. **Este `CLAUDE.md`** — el mapa completo (ya lo estás leyendo).
-2. `drablock/A1-Pilares.md` — la constitución. Los 5 pilares filtran todo.
-3. `drablock/A2-Modelo-del-dragon.md` — cómo está hecho un dragón (4 capas). **Es el modelo de datos.**
-4. `drablock/A3-Vinculo-obediencia.md` — el corazón: vínculo + obediencia imperfecta.
-5. `drablock/A4-Biografia.md` → `A5-Personalidad-crianza.md` → `A6-Ciclo-de-vida-muerte.md` — las capas que dan profundidad.
-6. `drablock/A7-Sistema-de-batalla.md` — combate = fidelidad de control (el hook).
-7. `drablock/E1-Economia.md` — monedas, sinks, estructura del mundo.
-8. `drablock/C1-Backlog-MVP.md` — **qué construir y en qué orden.**
-9. `drablock/GDD-Dragones-Vinculo.md` — visión/contexto (opcional, largo; leelo si querés el *por qué* profundo).
+2. `A1-Pilares.md` — la constitución. Los 5 pilares filtran todo.
+3. `A2-Modelo-del-dragon.md` — cómo está hecho un dragón (4 capas). **Es el modelo de datos.**
+4. `A3-Vinculo-obediencia.md` — el corazón: vínculo + obediencia imperfecta.
+5. `A4-Biografia.md` → `A5-Personalidad-crianza.md` → `A6-Ciclo-de-vida-muerte.md` — las capas que dan profundidad.
+6. `A7-Sistema-de-batalla.md` — combate = fidelidad de control (el hook).
+7. `E1-Economia.md` — monedas, sinks, estructura del mundo.
+8. `C1-Backlog-MVP.md` — **qué construir y en qué orden.**
+9. `GDD-Dragones-Vinculo.md` — visión/contexto (opcional, largo; leelo si querés el *por qué* profundo).
 
-`drablock/Plan-de-Iteraciones.md` es meta (el proceso y el tablero de estado); consultalo si dudás del estado de algo.
+`Plan-de-Iteraciones.md` es meta (el proceso y el tablero de estado); consultalo si dudás del estado de algo.
 
 ---
 
 ## Modo de trabajo y registro de decisiones *(obligatorio)*
 
-Mantené la bitácora **`Registro-Decisiones-IA.md`** (raíz). Anotá ahí **toda decisión o asunción que no esté explícita en los specs**: números que fijes (los specs dejan el balance "a tuning"), reglas por defecto, ambigüedades que resuelvas, desvíos, stubs. El documento tiene las reglas y el formato. Esto le permite al dueño revisar lo que decidiste sin tu conversación, y a cualquier agente futuro entender el porqué del código.
+Mantené la bitácora **`Registro-Decisiones-IA.md`** (en este mismo directorio). Anotá ahí **toda decisión o asunción que no esté explícita en los specs**: números que fijes (los specs dejan el balance "a tuning"), reglas por defecto, ambigüedades que resuelvas, desvíos, stubs. El documento tiene las reglas y el formato. Esto le permite al dueño revisar lo que decidiste sin tu conversación, y a cualquier agente futuro entender el porqué del código.
 
 > Regla simple: **si tuviste que "inventar" algo para avanzar, va al registro.**
+
+---
+
+## Setup, requisitos y autonomía *(leé esto antes de codear)*
+
+### ¿Se puede desarrollar autónomo?
+**Sí para escribir todo el juego** (código, escenas, shaders, lógica). **No al 100% para llegar a un juego pulido y verificado**, porque dos cosas dependen del entorno y del dueño:
+- **Godot debe estar instalado** para correr/testear. Sin Godot, escribís a ciegas (no podés cazar errores de runtime ni ver el resultado).
+- **El "feel" y el test emocional los juzga un humano** (ver *Definición de Hecho del MVP*). Eso no se automatiza.
+
+### Requisitos
+| Necesitás | Para qué | ¿Obligatorio? |
+|---|---|---|
+| **Godot 4.2+** | Correr, testear e iterar el juego | **Sí** |
+| Display o `xvfb` (framebuffer virtual) | *Ejecutar* el juego (no solo chequeo headless) | Para ver/jugar |
+| **Git** | Versionar (el repo ya está iniciado en este directorio) | Recomendado |
+| Assets de arte | **No hace falta** para el MVP: el dragón es **procedural** (dibujado por código) | No |
+
+### Instalar y verificar (macOS)
+```bash
+# Instalar Godot 4 (una opción)
+brew install --cask godot
+# Si el binario no queda en PATH, usá la ruta del .app:
+GODOT="/Applications/Godot.app/Contents/MacOS/Godot"
+
+# Verificar versión (debe ser 4.2+)
+"$GODOT" --version
+
+# Parado en la raíz del repo (este directorio, drablock/):
+
+# 1) Chequeo headless del spike: importa el proyecto y sale, mostrando errores de script
+"$GODOT" --headless --path godot-b1-spike --quit
+
+# 2) Correr el spike con ventana (para VER los 12 dragones; R = regenerar)
+"$GODOT" --path godot-b1-spike
+```
+*(En otros SO: descargá el binario de https://godotengine.org/download y usá los mismos flags `--headless --path ... --quit` y `--path ...`.)*
+
+### Árbol de decisión para Fable
+- **¿Hay `godot` disponible en el entorno?**
+  - **Sí →** corré el chequeo headless del spike; si hay errores, arreglalos; corré el spike; **empezá a construir el MVP autónomo** siguiendo C1, registrando asunciones.
+  - **No →** escribí igual todo el código siguiendo C1, pero **avisá al dueño** que no pudiste verificar en ejecución y pedile que corra y te pase errores. No des por "hecho" nada que no corriste.
+- **¿Llegaste al vertical slice?** → pedile al dueño que lo **juegue** y valide el hook emocional (eso no lo podés juzgar vos).
+
+### Checklist de la primera sesión de Fable
+1. Leer `CLAUDE.md` (este archivo) y el orden de lectura.
+2. Verificar Godot (`--version`).
+3. Chequear + correr el spike; cerrar `B1-Spike-nota.md`.
+4. Crear el proyecto del juego en `game/` (ver *Convenciones de proyecto* abajo).
+5. Implementar el **vertical slice** de C1 (US-01, 03, 04, 05, 06, 08, 09, 11, 13).
+6. Registrar cada asunción en `Registro-Decisiones-IA.md`.
+7. Entregar el slice al dueño para playtest.
 
 ---
 
@@ -78,14 +132,14 @@ El resto del GDD (tesis de "unicidad por biografía", modelo de 4 capas, obedien
 
 ---
 
-## Mapa de archivos (`drablock/`)
+## Mapa de archivos *(todo en este directorio = raíz del repo)*
 
 | Archivo | Qué contiene |
 |---|---|
+| `CLAUDE.md` | Este archivo: el handoff y mapa completo. **Punto de entrada.** |
+| `Registro-Decisiones-IA.md` | **Bitácora que mantenés vos:** cada decisión/asunción que tomes al desarrollar. |
 | `GDD-Dragones-Vinculo.md` | Documento conceptual fundacional (visión, menú de direcciones). **Contexto, no decisiones — ver jerarquía arriba.** |
 | `Plan-de-Iteraciones.md` | El pipeline, el tablero de estado, propagación de cambios, fuera de alcance. |
-| `../CLAUDE.md` (raíz) | Este archivo: el handoff y mapa completo. |
-| `../Registro-Decisiones-IA.md` (raíz) | **Bitácora que mantenés vos:** cada decisión/asunción que tomes al desarrollar. |
 | `A1-Pilares.md` | Constitución: 5 pilares, permadeath, PvP, plataforma. **Empezá acá.** |
 | `A2-Modelo-del-dragon.md` | Dragón en 4 capas (Genotipo/Fenotipo/Biografía/Vínculo), edad, `stat_efectivo`. |
 | `A3-Vinculo-obediencia.md` | Confianza/Respeto/Apego, obediencia imperfecta, diagrama de estados. |
@@ -97,6 +151,7 @@ El resto del GDD (tesis de "unicidad por biografía", modelo de 4 capas, obedien
 | `B1-Spike-nota.md` | Nota de conclusión del spike (a completar tras correr el prototipo). |
 | `godot-b1-spike/` | **Proyecto Godot 4 corrible** — 12 dragones procedurales, 0 assets. |
 | `C1-Backlog-MVP.md` | Épicas + historias de usuario ordenadas del MVP. |
+| `game/` | *(a crear)* el proyecto Godot del **juego** (separado del spike). |
 
 ---
 
@@ -138,7 +193,7 @@ Esto es lo que un jugador **hace y siente** en el MVP, de principio a fin:
 
 ## Cómo arrancar a construir
 
-1. **Corré B1** (`drablock/godot-b1-spike/`, ver su README) y cerrá `B1-Spike-nota.md`. Si el proto tira errores, arreglalos (no lo pudo correr quien lo escribió) y anotalo en el registro.
+1. **Corré B1** (`godot-b1-spike/`, ver su README) y cerrá `B1-Spike-nota.md`. Si el proto tira errores, arreglalos (no lo pudo correr quien lo escribió) y anotalo en el registro.
 2. Leé `C1-Backlog-MVP.md`. El **vertical slice** mínimo está marcado ahí (US-01, 03, 04, 05, 06, 08, 09, 11, 13).
 3. Expandí cada US con la skill `us-generator` si querés detalle de implementación (opcional).
 4. Construí en el orden: `PROC → CRIA → CUIDADO → VINCULO → ENTREN → CONTROL → BIO → ECON → MUERTE`.
@@ -146,7 +201,7 @@ Esto es lo que un jugador **hace y siente** en el MVP, de principio a fin:
 
 ### Convenciones de proyecto (Godot)
 
-- **El juego va en un proyecto Godot nuevo**, separado del spike. Sugerencia: `drablock/game/` (el spike `godot-b1-spike/` es **descartable** — referencia, no base de producción; podés portar de él la generación procedural del dragón).
+- **El juego va en un proyecto Godot nuevo**, separado del spike. Sugerencia: `game/` (el spike `godot-b1-spike/` es **descartable** — referencia, no base de producción; podés portar de él la generación procedural del dragón).
 - **Godot 4.2+**, GDScript (podés sumar C# si lo justificás y lo anotás).
 - Estructura sugerida dentro de `game/`: `scenes/`, `scripts/`, `resources/` (para los datos del dragón como `Resource`), `assets/`, `shaders/`. Ajustala si tenés una mejor y la anotás.
 - **Modelá el dragón según las 4 capas de A2** como estructura de datos persistible (guardar/cargar local para el MVP).
